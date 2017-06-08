@@ -4,7 +4,7 @@ import io.prediction.workflow.CreateWorkflow.WorkflowConfig
 import io.prediction.workflow._
 import org.joda.time.DateTime
 import org.template.complementarypurchase
-import org.template.complementarypurchase.{AlgorithmParams, PreparatorParams}
+import org.template.complementarypurchase.ComplementaryPurchaseEngine
 import org.template.complementarypurchase.DataSourceParams
 //import breeze.linalg.rank
 
