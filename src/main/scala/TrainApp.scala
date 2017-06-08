@@ -38,11 +38,11 @@ object TrainApp extends App {
 
   WorkflowUtils.modifyLogging(workflowConfig.verbose)
 
-  val dataSourceParams = DataSourceParams(evalK = Some(3))
+  val dataSourceParams = DataSourceParams(sys.env.get("APP_NAME").get)
   val preparatorParams = EmptyParams()
  // val preparatorParams =PreparatorParams(nGram = 2, numFeatures = 500)
  
-  val algorithmParamsList = Seq("algo"-> AlgorithmParams(basketWindow = 120, maxRuleLength = 2, minSupport=0.001,minConfidence =0.1, minLift=1.0,minBasketSize=2, maxNumRulesPerCond=5))
+  val algorithmParamsList = Seq("algo"-> AlgorithmParams(basketWindow = 120, maxRuleLength = 2, minSupport=0.001,minConfidence =0.1, minLift=1.0,minBasketSize=2, maxNumRulesPerCond=5 ))
   val servingParams = EmptyParams()
 
   val engineInstance = EngineInstance(
