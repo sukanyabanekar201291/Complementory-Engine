@@ -38,7 +38,7 @@ object TrainApp extends App {
 
   WorkflowUtils.modifyLogging(workflowConfig.verbose)
 
-  val dataSourceParams = DataSourceParams(sys.env.get("APP_NAME").get, evalK = Some(3))
+  val dataSourceParams = DataSourceParams(evalK = Some(3))
   val preparatorParams = EmptyParams()
  // val preparatorParams =PreparatorParams(nGram = 2, numFeatures = 500)
  

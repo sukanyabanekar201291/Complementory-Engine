@@ -23,7 +23,7 @@ class DataSource(val dsp: DataSourceParams)
 
   override
   def readTraining(sc: SparkContext): TrainingData = {
-    
+    println("--App"+dsp.appName)
     // get all "user" "buy" "item" events
     val buyEvents: RDD[BuyEvent] = PEventStore.find(
       appName = dsp.appName,
