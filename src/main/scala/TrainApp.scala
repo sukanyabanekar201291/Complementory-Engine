@@ -3,10 +3,10 @@ import io.prediction.data.storage.EngineInstance
 import io.prediction.workflow.CreateWorkflow.WorkflowConfig
 import io.prediction.workflow._
 import org.joda.time.DateTime
-import org.template.textclassification.{LRAlgorithmParams, PreparatorParams}
-//import io.prediction.controller.WorkflowParams
-import org.template.textclassification.DataSourceParams
-import breeze.linalg.rank
+import org.template.complementarypurchase
+
+import org.template.complementarypurchase.DataSourceParams
+//import breeze.linalg.rank
 
 object TrainApp extends App {
 
@@ -18,7 +18,7 @@ object TrainApp extends App {
   // WTF: envs must not be empty or CreateServer.engineInstances.get... fails due to JDBCUtils.stringToMap
   val sparkConf = Map("spark.executor.extraClassPath" -> ".")
 
-  val engineFactoryName = "org.template.textclassification.TextClassificationEngine"
+  val engineFactoryName = "org.template.complementarypurchase.ComplementaryPurchaseEngine"
 
 
   val workflowConfig = WorkflowConfig(
@@ -39,10 +39,10 @@ object TrainApp extends App {
   WorkflowUtils.modifyLogging(workflowConfig.verbose)
 
   val dataSourceParams = DataSourceParams(sys.env.get("APP_NAME").get, evalK = Some(3))
-  //val preparatorParams = EmptyParams()
-  val preparatorParams =PreparatorParams(nGram = 2, numFeatures = 500)
-  //val algorithmParamsList = Seq("als" -> ALSAlgorithmParams(rank = 10, numIterations = 10, lambda = 0.01, seed = Some(3)))
-  val algorithmParamsList = Seq("lr"-> LRAlgorithmParams(nGram = 1, numFeatures = 500, SPPMI=false,regParam = 0.5))
+  val preparatorParams = EmptyParams()
+ // val preparatorParams =PreparatorParams(nGram = 2, numFeatures = 500)
+ 
+  val algorithmParamsList = Seq("algo"-> AlgorithmParams(basketWindow = 120, maxRuleLength = 2, minSupport=0.001,minConfidence =0.1, minLift=1.0,minBasketSize=2, maxNumRulesPerCond=5))
   val servingParams = EmptyParams()
 
   val engineInstance = EngineInstance(
@@ -87,4 +87,5 @@ object TrainApp extends App {
   CreateServer.actorSystem.shutdown()
 
 }
+
 
