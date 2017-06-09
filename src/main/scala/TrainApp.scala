@@ -1,11 +1,10 @@
 import org.template.complementarypurchase.DataSourceParams
-
 import io.prediction.controller.{EmptyParams, EngineParams}
 import io.prediction.data.storage.EngineInstance
 import io.prediction.workflow.CreateWorkflow.WorkflowConfig
 import io.prediction.workflow._
 import org.joda.time.DateTime
-import org.template.complementarypurchase.ComplementaryPurchaseEngine
+
 
 
 
@@ -45,7 +44,7 @@ object TrainApp extends App {
   val preparatorParams = EmptyParams()
  // val preparatorParams =PreparatorParams(nGram = 2, numFeatures = 500)
  
-  val algorithmParamsList = Seq("algo"-> AlgorithmsParams(basketWindow = 120, maxRuleLength = 2, minSupport=0.001, minConfidence =0.1, minLift=1.0, minBasketSize=2, maxNumRulesPerCond=5 ))
+  val algorithmParamsList = Seq("algo"-> AlgorithmParams(basketWindow = 120, maxRuleLength = 2, minSupport=0.001, minConfidence =0.1, minLift=1.0, minBasketSize=2, maxNumRulesPerCond=5 ))
   val servingParams = EmptyParams()
 
   val engineInstance = EngineInstance(
