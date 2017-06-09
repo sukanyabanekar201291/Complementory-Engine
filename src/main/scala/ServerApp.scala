@@ -13,7 +13,10 @@ object ServerApp extends App {
   val eventServerIp = sys.env.getOrElse("EVENT_SERVER_IP", "localhost")
   val eventServerPort = sys.env.getOrElse("EVENT_SERVER_PORT", "7070").toInt
   val maybeAccessKey = sys.env.get("ACCESS_KEY")
-
+  println("port---"+port)
+  println("eventServerIp----"+eventServerIp)
+  println("eventServerPort---"+eventServerPort)
+  println("maybeAccessKey---"+maybeAccessKey)
 
   val maybeLatestEngineInstance = CreateServer.engineInstances.getLatestCompleted(EngineConfig.engineId, EngineConfig.engineVersion, EngineConfig.engineVariantId)
 
