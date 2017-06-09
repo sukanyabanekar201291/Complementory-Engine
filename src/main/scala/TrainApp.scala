@@ -1,4 +1,5 @@
-
+import org.template.complementarypurchase.DataSourceParams
+import org.template.complementarypurchase.AlgorithmParams
 import io.prediction.controller.{EmptyParams, EngineParams}
 import io.prediction.data.storage.EngineInstance
 import io.prediction.workflow.CreateWorkflow.WorkflowConfig
