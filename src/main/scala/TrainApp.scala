@@ -4,7 +4,7 @@ import io.prediction.data.storage.EngineInstance
 import io.prediction.workflow.CreateWorkflow.WorkflowConfig
 import io.prediction.workflow._
 import org.joda.time.DateTime
-import org.template.complementarypurchase.{LRAlgorithmParams, PreparatorParams}
+import org.template.complementarypurchase.{AlgorithmParams, PreparatorParams}
 
 
 
