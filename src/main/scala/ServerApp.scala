@@ -5,19 +5,19 @@ import io.prediction.data.storage.EngineManifest
 import io.prediction.workflow.{CreateServer, ServerConfig, WorkflowUtils}
 import spray.can.Http
 import spray.can.server.ServerSettings
-import java.util.logging.Logger
 
 object ServerApp extends App {
+  println("inside server app")
+  TrainApp.train()
 
   val port = sys.env.getOrElse("PORT", "8000").toInt
   val eventServerIp = sys.env.getOrElse("EVENT_SERVER_IP", "localhost")
   val eventServerPort = sys.env.getOrElse("EVENT_SERVER_PORT", "7070").toInt
   val maybeAccessKey = sys.env.get("ACCESS_KEY")
-  println("port---"+port)
+  println("port----"+port)
   println("eventServerIp----"+eventServerIp)
-  println("eventServerPort---"+eventServerPort)
-  println("maybeAccessKey---"+maybeAccessKey)
-
+  println(" eventServerPort----"+eventServerPort)
+  println("maybeAccessKey----"+maybeAccessKey)
   val maybeLatestEngineInstance = CreateServer.engineInstances.getLatestCompleted(EngineConfig.engineId, EngineConfig.engineVersion, EngineConfig.engineVariantId)
 
   maybeLatestEngineInstance.map { engineInstance =>
@@ -37,8 +37,7 @@ object ServerApp extends App {
       eventServerPort = eventServerPort,
       accessKey = maybeAccessKey
     )
-    Logger.getAnonymousLogger.info("engineInstance.engineFactory:" + engineInstance.engineFactory)
-    //engineInstance.engineFactory = "org.template.textclassification.TextClassificationEngine"
+
     val (engineLanguage, engineFactory) = WorkflowUtils.getEngine(engineInstance.engineFactory, getClass.getClassLoader)
     val engine = engineFactory()
 
