@@ -1,4 +1,4 @@
-package org.template.complementarypurchase
+
 import io.prediction.controller.{EmptyParams, EngineParams}
 import io.prediction.data.storage.EngineInstance
 import io.prediction.workflow.CreateWorkflow.WorkflowConfig
@@ -7,7 +7,7 @@ import org.joda.time.DateTime
 import org.template.complementarypurchase.ComplementaryPurchaseEngine
 
 
-import org.template.complementarypurchase.DataSourceParams
+
 //import breeze.linalg.rank
 
 object TrainApp extends App {
