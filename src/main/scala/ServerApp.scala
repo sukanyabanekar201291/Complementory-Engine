@@ -49,11 +49,11 @@ object ServerApp extends App {
       engineLanguage,
       manifest
     )
-
+    println("actor----"+actor)
     val actorSystem = ActorSystem("pio-server")
-
+    println("actorSystem-----"+actorSystem)
     val settings = ServerSettings(actorSystem)
-
+    println("settings-----"+settings) 
     IO(Http)(actorSystem) ! Http.Bind(listener = actor, interface = sc.ip, port = sc.port)
 
     actorSystem.awaitTermination()
