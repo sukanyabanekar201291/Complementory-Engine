@@ -7,21 +7,23 @@ import spray.can.Http
 import spray.can.server.ServerSettings
 
 object ServerApp extends App {
-  println("inside server app")
-  
 
   val port = sys.env.getOrElse("PORT", "8000").toInt
   val eventServerIp = sys.env.getOrElse("EVENT_SERVER_IP", "localhost")
   val eventServerPort = sys.env.getOrElse("EVENT_SERVER_PORT", "7070").toInt
   val maybeAccessKey = sys.env.get("ACCESS_KEY")
-  println("port----"+port)
-  println("eventServerIp----"+eventServerIp)
-  println(" eventServerPort----"+eventServerPort)
-  println("maybeAccessKey----"+maybeAccessKey)
+  println("port---"+port)
+  println("eventServerIp---"+eventServerIp)
+  println("eventServerPort----"+eventServerPort)
+  println("maybeAccessKey---"+maybeAccessKey)
   val maybeLatestEngineInstance = CreateServer.engineInstances.getLatestCompleted(EngineConfig.engineId, EngineConfig.engineVersion, EngineConfig.engineVariantId)
-
-  maybeLatestEngineInstance.map {  
- engineInstance =>
+  println("maybeLatestEngineInstance---"+maybeLatestEngineInstance)
+  maybeLatestEngineInstance.map { engineInstance =>
+    // the spark config needs to be set in the engineInstance
+    engineInstance.copy(sparkConf = engineInstance.sparkConf.updated("spark.master", "local"))
+  }.fold {
+    println("Could not get latest completed engine instance")
+  } { engineInstance =>
 
     val sc = ServerConfig(
       engineInstanceId = engineInstance.id,
@@ -58,4 +60,3 @@ object ServerApp extends App {
   }
 
 }
-
