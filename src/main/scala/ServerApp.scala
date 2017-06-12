@@ -23,7 +23,8 @@ object ServerApp extends App {
   maybeLatestEngineInstance.map { engineInstance =>
     // the spark config needs to be set in the engineInstance
     engineInstance.copy(sparkConf = engineInstance.sparkConf.updated("spark.master", "local"))
-  } { engineInstance =>
+  } 
+ engineInstance =>
 
     val sc = ServerConfig(
       engineInstanceId = engineInstance.id,
