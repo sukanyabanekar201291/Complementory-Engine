@@ -4,6 +4,6 @@ object EngineConfig {
   val engineVersion = sys.env.getOrElse("ENGINE_VERSION", "default")
   val engineVariant = "engine.json"
   val engineVariantId = "default"
-
+  println("engineId----"+engineId)
 }
 
