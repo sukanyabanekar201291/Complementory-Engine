@@ -20,10 +20,7 @@ object ServerApp extends App {
   println("maybeAccessKey----"+maybeAccessKey)
   val maybeLatestEngineInstance = CreateServer.engineInstances.getLatestCompleted(EngineConfig.engineId, EngineConfig.engineVersion, EngineConfig.engineVariantId)
 
-  maybeLatestEngineInstance.map { engineInstance =>
-    // the spark config needs to be set in the engineInstance
-    engineInstance.copy(sparkConf = engineInstance.sparkConf.updated("spark.master", "local"))
-  } 
+  maybeLatestEngineInstance.map {  
  engineInstance =>
 
     val sc = ServerConfig(
