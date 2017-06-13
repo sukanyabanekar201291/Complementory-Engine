@@ -12,10 +12,7 @@ object ServerApp extends App {
   val eventServerIp = sys.env.getOrElse("EVENT_SERVER_IP", "localhost")
   val eventServerPort = sys.env.getOrElse("EVENT_SERVER_PORT", "7070").toInt
   val maybeAccessKey = sys.env.get("ACCESS_KEY")
-  println("port---"+port)
-  println("eventServerIp---"+eventServerIp)
-  println("eventServerPort----"+eventServerPort)
-  println("maybeAccessKey---"+maybeAccessKey)
+  
   val maybeLatestEngineInstance = CreateServer.engineInstances.getLatestCompleted(EngineConfig.engineId, EngineConfig.engineVersion, EngineConfig.engineVariantId)
   println("maybeLatestEngineInstance---"+maybeLatestEngineInstance)
   maybeLatestEngineInstance.map { engineInstance =>
@@ -49,11 +46,11 @@ object ServerApp extends App {
       engineLanguage,
       manifest
     )
-    println("actor----"+actor)
+    
     val actorSystem = ActorSystem("pio-server")
-    println("actorSystem-----"+actorSystem)
+    
     val settings = ServerSettings(actorSystem)
-    println("settings-----"+settings) 
+    
     IO(Http)(actorSystem) ! Http.Bind(listener = actor, interface = sc.ip, port = sc.port)
 
     actorSystem.awaitTermination()
